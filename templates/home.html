@@ -1,0 +1,50 @@
+
+ {% extends 'base.html' %}
+ {% load static %}
+
+ {% block content %}
+
+<!-- ========================= SECTION MAIN ========================= -->
+<section class="section-intro padding-y-sm">
+<div class="container">
+
+<div class="intro-banner-wrap">
+	<img src="{% static 'images/banners/anime-cover.webp' %}" class="img-fluid rounded">
+</div>
+
+</div> <!-- container //  -->
+</section>
+<!-- ========================= SECTION MAIN END// ========================= -->
+
+<!-- ========================= SECTION  ========================= -->
+<section class="section-name padding-y-sm">
+<div class="container">
+
+<header class="section-heading">
+	<h3 class="section-title text-center">Featured Categories</h3>
+	<h6 class="section-title text-center">Discover amazing designs by artists from all over the globe! </h6>
+</header><!-- sect-heading -->
+
+	
+<div class="row">
+	{% for category in categories %}
+	<div class="col-md-4">
+		<div class="card card-product-grid">
+			<a href="store/catagory/{{category.slug}}" class="img-wrap"> <img src="{{category.cat_image.url}}"> </a>
+			<figcaption class="info-wrap">
+				<div class="price mt-1 featured-category text-center">{{category.catagory_name}}</div> <!-- price-wrap.// -->
+			</figcaption>
+		</div>
+	</div> <!-- col.// -->
+	{% endfor %}
+</div> <!-- row.// -->
+
+</div><!-- container // -->
+</section>
+<!-- ========================= SECTION  END// ========================= -->
+
+
+</body>
+</html>
+
+ {% endblock %} 
