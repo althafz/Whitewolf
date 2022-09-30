@@ -4,6 +4,7 @@ import random
 from django.shortcuts import render, redirect
 
 import accounts
+from cart.models import Cart
 from .forms import RegisterationForm
 from .models import Account
 from django.contrib import messages, auth
@@ -18,6 +19,8 @@ from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
 from django.core.mail import EmailMessage
 
+
+from cart.views import _cart_id
 # Register section start  #
 
 def register(request):
@@ -67,6 +70,11 @@ def login(request):
         user = auth.authenticate(email=email, password=password)
         
         if user is not None:
+            # try:
+            #     cart = Cart.objects.get(cart_id=_cart_id(request))
+                
+            # except:
+            #     pass    
             auth.login(request, user)
             messages.success(request, 'You are now logged in.')
             return redirect('dashboard')

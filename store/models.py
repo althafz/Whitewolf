@@ -25,3 +25,26 @@ class Products(models.Model):
         return self.product_name
     
     
+class VariationManager(models.Model):
+    def sizes(self):
+        return super(VariationManager, self).filter(variation_catagory='size', is_active=True )    
+    
+
+variation_catagory_choice = (
+    ('size', 'size'),
+)
+
+
+class Variation(models.Model):
+    product            = models.ForeignKey(Products, on_delete=models.CASCADE)
+    variation_catagory = models.CharField(max_length=100, choices=variation_catagory_choice)  
+    variation_value    = models.CharField(max_length=100)
+    is_active          = models.BooleanField(default=True)
+    created_date       = models.DateField(auto_now=True)     
+    
+    
+    objects = VariationManager()
+    
+    def __str__(self):
+        return self.variation_value 
+    

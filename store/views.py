@@ -41,12 +41,15 @@ def product_detail(request, catagory_slug, product_slug):
    
     try:
         single_product = Products.objects.get(catagory__slug = catagory_slug, slug=product_slug)
+        
     except Exception as e:
         raise e
     
     context = {
         'single_product': single_product,
+        
     }    
+    print(single_product)
     return render(request, 'store/product_detail.html', context)
 
 
