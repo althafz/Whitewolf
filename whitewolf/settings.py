@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts',
     'store',
     'cart',
+    'orders',
 ]
 
 MIDDLEWARE = [
@@ -149,3 +150,10 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'althagtm@gmail.com'
 EMAIL_HOST_PASSWORD = 'ravg wnyi jokb zbkc'
 EMAIL_USE_TLS = True
+
+
+# Payment
+
+
+RAZORPAY_KEY_ID ='rzp_test_q9ncHi5w8ZrIKP'
+RAZORPAY_KEY_SECRET ='lH5yaIsqUAM5Qe4FwVQSaDFU'

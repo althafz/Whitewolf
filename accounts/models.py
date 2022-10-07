@@ -1,4 +1,5 @@
 from ast import If
+from distutils.command.upload import upload
 import email
 from pyexpat import model
 from django.db import models
@@ -80,3 +81,19 @@ class Account(AbstractBaseUser):
     def has_module_perms(self, add_label):
         return True
     
+
+class UserProfile(models.Model):
+    user            = models.OneToOneField(Account, on_delete=models.CASCADE) 
+    address_1       = models.CharField( blank=True, max_length=50)
+    address_2       = models.CharField( blank=True, max_length=50)
+    profile_picture = models.ImageField( blank=True, upload_to='userprofile')
+    city            = models.CharField( blank=True, max_length=20)
+    state           = models.CharField( blank=True, max_length=20)
+    pin         = models.CharField( blank=True, max_length=20)
+    
+    
+    def __str__(self):
+        return self.user.first_name
+    
+    def full_address(self):
+        return f'{self.address_1} {self.address_2}'
