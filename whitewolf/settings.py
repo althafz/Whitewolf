@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'store',
     'cart',
     'orders',
+    'adminpanel',
 ]
 
 MIDDLEWARE = [
@@ -155,5 +156,5 @@ EMAIL_USE_TLS = True
 # Payment
 
 
-RAZORPAY_KEY_ID ='rzp_test_q9ncHi5w8ZrIKP'
-RAZORPAY_KEY_SECRET ='lH5yaIsqUAM5Qe4FwVQSaDFU'
+RAZOR_KEY_ID ='rzp_test_0p3OKZSfte9wyE'
+RAZOR_KEY_SECRET ='MIU79xM6vIW5GvhZTg3DT0Yh'

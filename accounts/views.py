@@ -3,15 +3,13 @@ import email
 from multiprocessing import context
 import random
 from django.shortcuts import render, redirect, get_object_or_404
-
-import accounts
 from cart.models import Cart, Cartitem
 from .forms import RegisterationForm, UserForm, UserProfileForm
 from .models import Account, UserProfile
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from orders.models import Order
+from orders.models import Order, OrderProduct
 
 # Verification email
 from django.contrib.sites.shortcuts import get_current_site
@@ -53,6 +51,7 @@ def register(request):
             to_email = email
             send_email = EmailMessage(mail_subject, message, to=[to_email])
             send_email.send()
+            
             #messages.success(request, 'Please check your email for confirming registration at the given email [something@gmail.com]')
             return redirect('/accounts/login/?command=verification&email='+email)
     else:        
@@ -123,7 +122,7 @@ def login(request):
                     nextPage = params['next']
                     return redirect(nextPage)
             except:
-                return redirect('dashboard')
+                return redirect('home')
         else:
             messages.error(request, 'Invalid login')
             return redirect('login')
@@ -153,6 +152,13 @@ def activate(request, uidb64, token):
     if user is not None and default_token_generator.check_token(user, token):
         user.is_active = True
         user.save()
+        
+        # Userprofile generation
+        user_profile = UserProfile(
+            user = user
+        )
+        user_profile.save()
+        
         messages.success(request, 'Your account has been activated.')
         return redirect('login')
     else:
@@ -257,7 +263,7 @@ def my_orders(request):
     context ={
         'orders':  orders,
     }
-    return render(request, 'accounts/my_orders.html')
+    return render(request, 'accounts/my_orders.html', context)
 
 
 @login_required(login_url ='login')
@@ -309,3 +315,19 @@ def change_password(request):
             return redirect('change_password')
                 
     return render(request, 'accounts/change_password.html')
+
+@login_required(login_url ='login')
+def order_detail(request, order_id):
+    order_detail = OrderProduct.objects.filter(order__order_number=order_id)
+    order = Order.objects.get(order_number=order_id)
+    subtotal = 0
+    for i in order_detail:
+        subtotal += i.product_price * i.quantity
+    context = {
+        'order_detail': order_detail,
+        'order': order,
+        'subtotal': subtotal,
+        
+    }
+    return render(request, 'accounts/order_detail.html', context)
+    

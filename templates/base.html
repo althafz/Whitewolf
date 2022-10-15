@@ -33,8 +33,15 @@
 <!-- custom javascript -->
 <script src="{% static 'js/script.js' %}" type="text/javascript"></script>
 
+<!-- PayPal script -->
+
+<script src="https://www.paypal.com/sdk/js?client-id=Aev2_Z3xksB6Ba0_8-UjC3fKQiGlGtA0FNLsQR4kI2UTAZTc8DckDSnFse--syseQHvFaR2y1zFHXtgD&currency=USD"></script>
+
 <script type="text/javascript">
 /// some script
+
+
+
 
 // jquery ready start
 $(document).ready(function() {
@@ -45,6 +52,19 @@ $(document).ready(function() {
 </script>
 
 <style>
+    .active {
+        background-color: #252129 !important;
+        border : none !important;
+        color: #fff !important;
+    }
+
+    .list-group-item {
+        color: #252129;
+    }
+    .list-group-item:hover {
+        color: #252129;
+    }
+
     .store-btn {
         background-color: black !important;
         border: 1px solid white !important;

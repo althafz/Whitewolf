@@ -1,10 +1,10 @@
-
 from django.urls import path
-from . import views
+from .views import *
 
 urlpatterns = [
-    path('place_order/', views.place_order, name='place_order'),
-    path('payment/', views.payment, name='payment'),
-    path('success',views.success,name='success')
-   
-] 
+  path('place_order/', place_order, name='place_order'),
+  path('payment/', payment, name='payment'),
+  path('status/', payment_status, name='payment_status'),
+  path('success/', payment_success, name='payment_success'),
+  path('fail/', payment_fail, name='payment_fail')
+]

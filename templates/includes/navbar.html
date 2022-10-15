@@ -51,7 +51,11 @@
                     <div class="widget-header">
                         <small class="title text-muted">Welcome {{user.first_name}}</small>
                         <div> 
+                            {% if user.is_admin %}
+                            <a href="{% url 'manager_dashboard' %}" class="nav-a">Dashboard</a> <span class="dark-transp"> | </span>
+                            {% else %}
                             <a href="{% url 'dashboard' %}" class="nav-a">Dashboard</a> <span class="dark-transp"> | </span>
+                            {% endif %}
                             <a href="{% url 'logout' %}" class="nav-a"> Logout</a>
                         </div>
                     </div>
